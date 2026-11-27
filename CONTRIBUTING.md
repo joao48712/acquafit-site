@@ -82,6 +82,10 @@ Cada assunto fica em um arquivo próprio, para que duas pessoas raramente editem
 
 Instalar ou atualizar pacotes (`package.json`) e mudar cores globais: faça em um PR separado.
 
+## Trocar o mapa ou o Street View
+
+No Google Maps, abra o local (ou a vista da rua), clique em **Compartilhar > Incorporar um mapa** e copie só o endereço que está em `src="..."` para `maps.embed` ou `maps.streetView` da unidade.
+
 ## Cuidados com o conteúdo
 
 - Depoimento só entra se for real, copiado palavra por palavra, com a fonte.
