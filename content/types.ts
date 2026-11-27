@@ -14,7 +14,9 @@ export type Photo = {
   alt: string;
   width: number;
   height: number;
-  /** Aparece abaixo da imagem quando preenchida. */
+  /** Parte da foto que nunca é cortada (CSS object-position). */
+  focus?: string;
+  /** Aparece sobre a imagem quando preenchida. */
   caption?: string;
 };
 

@@ -22,6 +22,12 @@ npm run dev
 | `npm test`          | Testes (horários, links, dados das unidades) |
 | `npm run build`     | Compila como na Vercel                       |
 
+## Convidar quem vai editar
+
+No GitHub: **Settings > Collaborators > Add people**. A pessoa aceita o convite por e-mail e segue o [CONTRIBUTING.md](CONTRIBUTING.md).
+
+A `main` está protegida: só aceita Pull Request com a verificação **verificar** aprovada e o branch atualizado.
+
 ## Publicar na Vercel (primeira vez)
 
 1. Entre em https://vercel.com com a conta do GitHub dona do repositório.
@@ -43,4 +49,6 @@ Atenção:
 - [ ] Domingo no São Cristóvão: o site usa 9h às 12h (flow.page); o TotalPass mostra fechado.
 - [ ] TotalPass e Wellhub nas três unidades e o plano mínimo de cada uma.
 - [ ] Autorização de uso das fotos, do logo e dos depoimentos.
-- [ ] Logo oficial em arquivo vetorial.
+- [ ] Logo oficial em arquivo vetorial (o atual é um redesenho provisório).
+- [ ] Fotos internas em boa resolução (veja `public/images/FONTES.md`).
+- [ ] O quadro do mapa do Google mostra a nota de cada unidade, inclusive a de Tupi Paulista. O site não controla esse quadro.

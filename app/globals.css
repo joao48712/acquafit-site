@@ -1,1 +1,221 @@
 @import "tailwindcss";
+
+/* Cores e tipografia do site. Avise a equipe antes de mudar. */
+@theme {
+  --color-deep: #0a0f1c;
+  --color-panel: #121a2c;
+  --color-line: #263149;
+  --color-foam: #f3f1ec;
+  --color-mist: #a9b3c7;
+  --color-ember: #ff6a2b;
+  --color-ember-soft: #ff8a57;
+  --color-whats: #25d366;
+
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-body), system-ui, sans-serif;
+  --font-display: var(--font-heavy), Impact, sans-serif;
+  --font-accent: var(--font-serif), Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-deep text-foam font-sans antialiased;
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ember-soft);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: min(100% - 2rem, 76rem);
+    margin-inline: auto;
+  }
+
+  /* Título gigante condensado; <em> entra em serifa itálica. */
+  .display,
+  .title {
+    font-family: var(--font-display);
+    font-stretch: 75%;
+    font-weight: 850;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+    overflow-wrap: break-word;
+  }
+
+  .display em,
+  .title em {
+    font-family: var(--font-accent);
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: 100%;
+    text-transform: none;
+    letter-spacing: -0.02em;
+    color: var(--color-ember);
+  }
+
+  .title {
+    font-size: clamp(2.75rem, 8vw, 6rem);
+  }
+
+  .btn {
+    display: inline-flex;
+    min-height: 3rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    cursor: pointer;
+    transition:
+      transform 160ms var(--ease-out-strong),
+      background-color 160ms ease,
+      border-color 160ms ease;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    @apply bg-ember text-deep;
+  }
+
+  .btn-ghost {
+    @apply border-line text-foam border;
+  }
+
+  .btn-whats {
+    @apply bg-whats text-deep;
+  }
+
+  .link {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size 200ms var(--ease-out-strong);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      @apply bg-ember-soft;
+    }
+
+    .btn-ghost:hover {
+      @apply border-foam;
+    }
+
+    .btn-whats:hover {
+      filter: brightness(1.08);
+    }
+
+    .link:hover {
+      background-size: 100% 1px;
+    }
+  }
+
+  /* Menu do WhatsApp (popover nativo): nasce do canto do botão flutuante. */
+  .wa-menu {
+    position: fixed;
+    inset: auto max(1rem, env(safe-area-inset-right))
+      calc(5.5rem + env(safe-area-inset-bottom)) auto;
+    width: min(22rem, calc(100vw - 2rem));
+    max-height: calc(100dvh - 7rem);
+    overflow-y: auto;
+    transform-origin: bottom right;
+    opacity: 0;
+    transform: scale(0.95) translateY(0.5rem);
+    transition:
+      opacity 160ms var(--ease-out-strong),
+      transform 160ms var(--ease-out-strong),
+      overlay 160ms allow-discrete,
+      display 160ms allow-discrete;
+  }
+
+  .wa-menu:popover-open {
+    opacity: 1;
+    transform: none;
+    transition-duration: 220ms;
+
+    @starting-style {
+      opacity: 0;
+      transform: scale(0.95) translateY(0.5rem);
+    }
+  }
+}
+
+/* Entrada do topo, uma vez por carregamento. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+}
+
+@keyframes unveil {
+  from {
+    clip-path: inset(12% 6% round 1.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter > * {
+    animation: rise 600ms var(--ease-out-strong) backwards;
+  }
+
+  .enter > :nth-child(2) {
+    animation-delay: 70ms;
+  }
+
+  .enter > :nth-child(3) {
+    animation-delay: 130ms;
+  }
+
+  .enter > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+
+  @supports (animation-timeline: view()) {
+    .unveil {
+      animation: unveil linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn,
+  .wa-menu,
+  .wa-menu:popover-open {
+    transform: none;
+  }
+}

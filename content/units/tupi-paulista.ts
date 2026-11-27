@@ -15,6 +15,7 @@ export const tupiPaulista: Unit = {
     alt: "Fachada azul-marinho da AcquaFit Tupi Paulista com o logo acima da entrada",
     width: 810,
     height: 720,
+    focus: "center top",
   },
   photos: [],
   maps: {
